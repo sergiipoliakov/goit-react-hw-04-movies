@@ -46,18 +46,20 @@ export default class MovieDetailsPage extends Component {
 
       genres,
     } = this.state;
-    const releaseDate = this.state.release_date;
-    // console.log(releaseDate.slice(0, 4));
+    let releaseDate;
+
+    if (release_date) {
+      releaseDate = release_date.slice(0, 4);
+    }
 
     return (
       <div>
         <button type="button" onClick={this.handleGoBack}>
           Назад к списку
         </button>
-        <h1>{`${this.state.title}(${releaseDate.slice(0, 4)})`}</h1>
-        {/* <h1>{`${title}(${release_date.slice(0, 4)})`}</h1> */}
+
         <h1>
-          {title} {release_date}
+          {title} ({releaseDate})
         </h1>
         <img
           src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
