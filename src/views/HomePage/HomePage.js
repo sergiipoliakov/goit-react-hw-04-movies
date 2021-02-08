@@ -6,6 +6,10 @@ import { getTrendingMovies } from '../../services/movies-Api';
 import styles from './HomePage.module.css';
 
 export default class HomePage extends Component {
+  static defaultProps = {
+    image:
+      'https://lh3.googleusercontent.com/proxy/gCazWuMuIGY_An8jiafKtH1X23xeiRrTrVlJsWoUuKOxuFNkWsgeAI1KuAQSrTGE67pbvmL87lvEFM8ZOQQa_o9TmMl34Nm_VY_mCfi9Y9RDZfsnKY0PEeM',
+  };
   state = {
     movies: [],
   };
@@ -20,6 +24,8 @@ export default class HomePage extends Component {
 
   render() {
     const { movies } = this.state;
+    const { image } = this.props;
+    console.log(image);
 
     return (
       <>
@@ -43,7 +49,11 @@ export default class HomePage extends Component {
                   {movie.title ? movie.title : movie.name}
                   <img
                     className={styles.img}
-                    src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
+                        : image
+                    }
                     alt={movie.title}
                   />
                 </Link>
