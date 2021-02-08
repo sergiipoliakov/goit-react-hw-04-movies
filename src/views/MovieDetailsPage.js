@@ -8,15 +8,13 @@ import routes from '../routes';
 
 export default class MovieDetailsPage extends Component {
   state = {
-    backdrop_path: null,
-    genres: [],
-    id: null,
-    original_title: null,
-    overview: null,
-    poster_path: null,
-    release_date: null,
-    revenue: null,
     title: null,
+    release_date: null,
+    poster_path: 'https://makitweb.com/demo/broken_image/images/noimage.png',
+    name: null,
+    overview: null,
+
+    genres: null,
   };
 
   async componentDidMount() {
@@ -30,32 +28,36 @@ export default class MovieDetailsPage extends Component {
   }
 
   handleGoBack = () => {
-    const { state } = this.props.location;
-    if (state && state.from) {
-      return this.props.history.push(state.from);
-    }
+    const { location, history } = this.props;
 
-    this.props.history.push(routes.movies);
+    history.push(location?.state?.from || routes.movies);
   };
 
   render() {
-    const { match } = this.props;
+    const { match, location } = this.props;
+    // console.log(location.state.from);
+
     const {
-      original_title,
+      title,
       release_date,
       poster_path,
       name,
       overview,
+
       genres,
     } = this.state;
+    const releaseDate = this.state.release_date;
+    // console.log(releaseDate.slice(0, 4));
 
     return (
       <div>
         <button type="button" onClick={this.handleGoBack}>
           Назад к списку
         </button>
+        <h1>{`${this.state.title}(${releaseDate.slice(0, 4)})`}</h1>
+        {/* <h1>{`${title}(${release_date.slice(0, 4)})`}</h1> */}
         <h1>
-          {original_title} {release_date}
+          {title} {release_date}
         </h1>
         <img
           src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
@@ -66,18 +68,34 @@ export default class MovieDetailsPage extends Component {
           alt={this.state.mame}
         /> */}
         <ul>
-          {genres.map(gener => (
-            <li key={gener.id}>{gener.name}</li>
-          ))}
+          {genres && genres.map(gener => <li key={gener.id}>{gener.name}</li>)}
         </ul>
 
         <h2>overview</h2>
 
         <p>{overview}</p>
 
-        <NavLink to={`${match.url}/cast`}>Cast</NavLink>
+        <NavLink
+          to={{
+            pathname: `${match.url}/cast`,
+            state: {
+              from: location,
+            },
+          }}
+        >
+          Cast
+        </NavLink>
         <br />
-        <NavLink to={`${match.url}/reviews`}>Reviews</NavLink>
+        <NavLink
+          to={{
+            pathname: `${match.url}/reviews`,
+            state: {
+              from: location,
+            },
+          }}
+        >
+          Reviews
+        </NavLink>
 
         <Route path={`${match.path}/cast`} component={Cast} />
         <Route path={`${match.path}/reviews`} component={Reviews} />

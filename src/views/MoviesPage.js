@@ -26,13 +26,11 @@ export default class MoviesPage extends Component {
   }
   fetchMovies = query => {
     getMoviesByQuery(query).then(respons => {
-      console.log(respons.data.results);
       this.setState({ movies: respons.data.results });
     });
   };
 
   handleChangeQuery = query => {
-    console.log(query);
     this.props.history.push({
       //   pathname: this.props.location.pathname,
       ...this.props.pathname,
@@ -42,7 +40,7 @@ export default class MoviesPage extends Component {
 
   render() {
     const { movies } = this.state;
-    console.log(movies);
+
     const { match } = this.props;
     return (
       <>

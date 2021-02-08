@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getMovieReview } from '../../services/movies-Api';
 
-export default class index extends Component {
+export default class Reviews extends Component {
   state = {
     reviews: [],
   };
@@ -19,13 +19,17 @@ export default class index extends Component {
     const { reviews } = this.state;
     return (
       <ul>
-        {reviews.map(review => (
-          <li key={review.id}>
-            <h2>{review.author}</h2>
+        {reviews.length > 0 ? (
+          reviews.map(review => (
+            <li key={review.id}>
+              <h2>{review.author}</h2>
 
-            <p>{review.content}</p>
-          </li>
-        ))}
+              <p>{review.content}</p>
+            </li>
+          ))
+        ) : (
+          <h2>Dont have any reviews about this movie!!</h2>
+        )}
       </ul>
     );
   }

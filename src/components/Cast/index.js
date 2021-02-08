@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+
 import { getMovieCast } from '../../services/movies-Api';
 
 export default class Cast extends Component {
