@@ -14,7 +14,7 @@ export const getTrendingMovies = () => {
   return axios({
     method: 'GET',
     url: `${base_URL}/3/trending/all/day?api_key=${api_key}`,
-  });
+  }).then(response => response.data);
 };
 
 export const getMovieDetalsById = movieId => {

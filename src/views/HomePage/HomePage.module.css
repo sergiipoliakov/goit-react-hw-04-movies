@@ -10,7 +10,7 @@
   margin-left: auto;
   margin-right: auto;
 
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 .item {
   text-align: center;
