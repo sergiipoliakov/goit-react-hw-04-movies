@@ -2,12 +2,17 @@ import { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AppBar from './components/AppBar/AppBar';
 // import Container from './components/Container/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-// import HomePage from './views/HomePage/HomePage';
-// import MoviesPage from './views/MoviesPage';
-// import MovieDetailsPage from './views/MovieDetailsPage';
+import {
+  Container,
+  Toolbar,
+  IconButton,
+  Typography,
+  Box,
+  Button,
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import { makeStyles } from '@material-ui/core/styles';
+
 import NotFoundView from './views/NotFoundView';
 import routes from './routes';
 
@@ -24,15 +29,52 @@ const MoviesPage = lazy(() =>
 );
 const MovieDetailsPage = lazy(() =>
   import(
-    './views/MovieDetailsPage.js' /* webpackChunkName: "movie-detail-page" */
+    './views/MovieDetailsPage' /* webpackChunkName: "movie-detail-page" */
   ),
 );
 
-const App = () => (
-  <>
-    <CssBaseline />
-    <Container>
-      <AppBar />
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(1),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
+function App() {
+  const classes = useStyles();
+  return (
+    <>
+      <AppBar position="fixed">
+        <Container fixed>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography varian="h1" className={classes.title}>
+              Kino Boom
+            </Typography>
+            <Box mr={3}>
+              <Button color="inherit" variant="outlined">
+                Log In
+              </Button>
+            </Box>
+            <Button color="secondary" variant="contained">
+              Sing Up
+            </Button>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
       <Suspense fallback={<h1>Загружаем...</h1>}>
         <Switch>
           <Route exact path={routes.home} component={HomePage} />
@@ -42,8 +84,8 @@ const App = () => (
           <Route component={NotFoundView} />
         </Switch>
       </Suspense>
-    </Container>
-  </>
-);
+    </>
+  );
+}
 
 export default App;

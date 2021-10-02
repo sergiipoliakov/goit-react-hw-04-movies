@@ -1,10 +1,11 @@
 import { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
+import './MovieDatailsPage.css';
 
-import { getMovieDetalsById } from '../services/movies-Api';
-import Cast from '../components/Cast';
-import Reviews from '../components/Reviews';
-import routes from '../routes';
+import { getMovieDetalsById } from '../../services/movies-Api';
+import Cast from '../../components/Cast';
+import Reviews from '../../components/Reviews';
+import routes from '../../routes';
 
 export default class MovieDetailsPage extends Component {
   state = {
@@ -35,7 +36,6 @@ export default class MovieDetailsPage extends Component {
 
   render() {
     const { match, location } = this.props;
-    // console.log(location.state.from);
 
     const {
       title,
@@ -51,31 +51,49 @@ export default class MovieDetailsPage extends Component {
     if (release_date) {
       releaseDate = release_date.slice(0, 4);
     }
+    let styles = {
+      root: {
+        backgroundImage: `url(https://image.tmdb.org/t/p/w500${this.state.backdrop_path})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+      },
+    };
+    console.log(styles.root);
 
     return (
       <div>
         <button type="button" onClick={this.handleGoBack}>
           Назад к списку
         </button>
+        <div
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original${this.state.backdrop_path})`,
+            backgroundSize: 'cover',
 
-        <h1>
-          {title} ({releaseDate})
-        </h1>
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-          alt={name}
-        />
-        {/* <img
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          <h1>
+            {title} ({releaseDate})
+          </h1>
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+            alt={name}
+          />
+          {/* <img
           src={`https://image.tmdb.org/t/p/w500/${this.state.backdrop_path}`}
           alt={this.state.mame}
         /> */}
-        <ul>
-          {genres && genres.map(gener => <li key={gener.id}>{gener.name}</li>)}
-        </ul>
+          <ul>
+            {genres &&
+              genres.map(gener => <li key={gener.id}>{gener.name}</li>)}
+          </ul>
 
-        <h2>overview</h2>
+          <h2>Описание</h2>
 
-        <p>{overview}</p>
+          <p className="overview">{overview}</p>
+        </div>
 
         <NavLink
           to={{
@@ -85,7 +103,7 @@ export default class MovieDetailsPage extends Component {
             },
           }}
         >
-          Cast
+          Актеры
         </NavLink>
         <br />
         <NavLink
@@ -96,7 +114,7 @@ export default class MovieDetailsPage extends Component {
             },
           }}
         >
-          Reviews
+          Ревю
         </NavLink>
 
         <Route path={`${match.path}/cast`} component={Cast} />

@@ -10,24 +10,31 @@ export const getMoviesByQuery = query => {
   });
 };
 
-export const getTrendingMovies = () => {
+export const getTrendingMovies = pageQuery => {
   return axios({
     method: 'GET',
-    url: `${base_URL}/3/trending/all/day?api_key=${api_key}`,
+    url: `${base_URL}/3/trending/all/day?page=1&api_key=${api_key}`,
+  }).then(response => response.data);
+};
+
+export const getPopularMovies = pageQuery => {
+  return axios({
+    method: 'GET',
+    url: `${base_URL}/3/movie/popular?page=1&api_key=${api_key}`,
   }).then(response => response.data);
 };
 
 export const getMovieDetalsById = movieId => {
   return axios({
     method: 'GET',
-    url: `${base_URL}/3/movie/${movieId}?api_key=${api_key}&language=en-US`,
+    url: `${base_URL}/3/movie/${movieId}?api_key=${api_key}&language=ru-RU`,
   });
 };
 
 export const getMovieReview = movieId => {
   return axios({
     method: 'GET',
-    url: `${base_URL}/3/movie/${movieId}/reviews?api_key=${api_key}&language=en-US`,
+    url: `${base_URL}/3/movie/${movieId}/reviews?api_key=${api_key}&language=ru-RU`,
   });
 };
 
@@ -35,6 +42,6 @@ export const getMovieCast = movieId => {
   return axios({
     method: 'GET',
 
-    url: `${base_URL}/3/movie/${movieId}/credits?api_key=${api_key}&language=en-US`,
+    url: `${base_URL}/3/movie/${movieId}/credits?api_key=${api_key}&language=ru-RU`,
   });
 };
