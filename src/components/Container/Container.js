@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import styles from './Container.module.css';
+import Container from '@mui/material/Container';
 
-export default function Container({ children }) {
-  return <div className={styles.container}>{children}</div>;
+export default function SimpleContainer({ children }) {
+  return (
+    <>
+      <Container maxWidth="lg">{children}</Container>
+    </>
+  );
 }
-Container.propTypes = {
-  children: PropTypes.array.isRequired,
-};

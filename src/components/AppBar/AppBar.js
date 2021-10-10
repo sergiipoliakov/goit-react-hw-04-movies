@@ -1,10 +1,11 @@
 import Navigation from '../Navigation/Navigation';
+import { AppBar } from '@material-ui/core';
 import styles from './Appbar.module.css';
 
 export default function Appbar() {
   return (
-    <header className={styles.header}>
+    <AppBar>
       <Navigation />
-    </header>
+    </AppBar>
   );
 }
