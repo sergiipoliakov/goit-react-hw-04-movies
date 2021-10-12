@@ -1,15 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AppBar from './components/AppBar/AppBar';
+import Header from 'components/Header';
 import Container from './components/Container/Container';
-import {
-  Toolbar,
-  IconButton,
-  Typography,
-  Box,
-  Button,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 
 import NotFoundView from './views/NotFoundView';
@@ -48,8 +40,9 @@ function App() {
   const classes = useStyles();
   return (
     <>
+      <Header />
       <Container>
-        <AppBar />
+        {/* <AppBar /> */}
         {/* <Toolbar>
           <IconButton
             edge="start"

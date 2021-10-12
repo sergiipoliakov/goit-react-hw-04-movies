@@ -9,7 +9,7 @@ const Navigation = () => (
       className={styles.link}
       activeClassName={styles.activeLink}
     >
-      Home
+      Популярно
     </NavLink>
 
     <NavLink
@@ -17,7 +17,14 @@ const Navigation = () => (
       className={styles.link}
       activeClassName={styles.activeLink}
     >
-      Movies
+      Фильмы
+    </NavLink>
+    <NavLink
+      to="/movies"
+      className={styles.link}
+      activeClassName={styles.activeLink}
+    >
+      Сериалы
     </NavLink>
   </nav>
 );
